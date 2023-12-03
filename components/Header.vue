@@ -4,13 +4,104 @@ export default {
         return {
             burgerActive: false
         }
-    }
-}
+    },
+    methods: {
+        bodyUnfixPosition() {
+            if (document.querySelector('#__nuxt').hasAttribute('data-body-scroll-fix')) {
+                // Получаем позицию прокрутки из атрибута
+                let scrollPosition = document.querySelector('#__nuxt').getAttribute('data-body-scroll-fix');
 
+                // Удаляем атрибут
+                document.querySelector('#__nuxt').removeAttribute('data-body-scroll-fix');
+
+                // Удаляем ненужные стили
+                document.querySelector('#__nuxt').style.overflow = '';
+                document.querySelector('#__nuxt').style.position = '';
+                document.querySelector('#__nuxt').style.top = '';
+                document.querySelector('#__nuxt').style.left = '';
+                document.querySelector('#__nuxt').style.width = '';
+                // Прокручиваем страницу на полученное из атрибута значение
+                window.scroll(0, scrollPosition);
+                window.previousScrollPosition = window.scrollY + 1
+                document.querySelector('#__nuxt').style.paddingRight = ''
+            }
+
+        },
+        getScrollBarWidth() {
+            var inner = document.createElement('p');
+            inner.style.width = "100%";
+            inner.style.height = "200px";
+
+            var outer = document.createElement('div');
+            outer.style.position = "absolute";
+            outer.style.top = "0px";
+            outer.style.left = "0px";
+            outer.style.visibility = "hidden";
+            outer.style.width = "200px";
+            outer.style.height = "150px";
+            outer.style.overflow = "hidden";
+            outer.appendChild(inner);
+
+            document.querySelector('#__nuxt').appendChild(outer);
+            var w1 = inner.offsetWidth;
+            outer.style.overflow = 'scroll';
+            var w2 = inner.offsetWidth;
+            if (w1 == w2) w2 = outer.clientWidth;
+
+            document.querySelector('#__nuxt').removeChild(outer);
+
+            return (w1 - w2);
+        },
+        bodyFixPosition() {
+            setTimeout(function () {
+                /* Ставим необходимую задержку, чтобы не было «конфликта» в случае, если функция фиксации вызывается сразу после расфиксации (расфиксация отменяет действия расфиксации из-за одновременного действия) */
+
+                if (!document.querySelector('#__nuxt').hasAttribute('data-body-scroll-fix')) {
+                    console.log(this.burgerActive)
+                    // Получаем позицию прокрутки
+                    let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                    // Ставим нужные стили
+                    document.querySelector('#__nuxt').setAttribute('data-body-scroll-fix', scrollPosition); // Cтавим атрибут со значением прокрутки
+                    document.querySelector('#__nuxt').style.overflow = 'hidden';
+                    document.querySelector('#__nuxt').style.position = 'fixed';
+                    document.querySelector('#__nuxt').style.top = '-' + scrollPosition + 'px';
+                    document.querySelector('#__nuxt').style.left = '0';
+                    document.querySelector('#__nuxt').style.width = '100vw';
+                    if (window.innerWidth > 600) {
+                        document.querySelector('#__nuxt').style.paddingRight = `${this.getScrollBarWidth()}px`
+                    }
+                }
+
+            }, 15);
+
+        }
+    },
+}
 </script>
 <template>
-    <header class="header" :class="{active: burgerActive}">
+    <header class="header" :class="{active: burgerActive}" :data-active="burgerActive">
         <div class="header__top hide_mobile">
+            <Script :children="jsonLd" type="application/ld+json">
+        {
+            "@context": "http://schema.org", 
+            "@type": "Organization", 
+            "name": "Indaparts",
+            "alternateName": "Indaparts.ru | Интернет-магазин автозапчастей с доставкой по Москве",
+            "description": "Indaparts.ru - ведущий интернет-магазин автозапчастей в Москве. Быстрая доставка, широкий ассортимент и привлекательные цены.",
+            "url": "https://msk.indaparts.ru/",
+            "email": "info@indaparts.ru",
+            "logo": "https://msk.indaparts.ru/img/logo.svg",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "RU",
+                "addressLocality": "Москва",
+                "addressRegion": "Московская область",
+                "postalCode": "115280",
+                "streetAddress": "Велозаводская ул., 5"
+            }
+       }
+        </Script>
             <div class="container">
                 <button class="open-geo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -44,8 +135,8 @@ export default {
             <div class="container">
                 <div class="header__row">
                     <button title="Открыть меню" class="header__burger">
-                        <img id="open-burger" @click="burgerActive = true" src="/img/burger-open-black.svg" alt="">
-                        <img id="close-burger" @click="burgerActive = false" src="/img/close.svg" alt="">
+                        <img id="open-burger" @click="bodyFixPosition(); burgerActive = true" src="/img/burger-open-black.svg" alt="">
+                        <img id="close-burger" @click="bodyUnfixPosition(); burgerActive = false" src="/img/close.svg" alt="">
                     </button>
                     <div class="header__logo">
                         <NuxtLink to="/">
@@ -193,5 +284,6 @@ export default {
                 </div>
             </div>
         </div>
+        
     </header>
 </template>

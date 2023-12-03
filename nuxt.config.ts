@@ -20,7 +20,14 @@ export default defineNuxtConfig({
   ssr: true,
   modules: [
     'nuxt-swiper',
-    'nuxt-graphql-client'
+    'nuxt-graphql-client',
+    [
+      'yandex-metrika-module-nuxt3',
+      {
+        id: '95761109',
+        webvisor: true,
+      }
+    ]
   ],
   runtimeConfig: {
     public: {

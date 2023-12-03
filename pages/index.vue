@@ -4,10 +4,10 @@
         return data
     })
     useSeoMeta({
-        title: mainPage.page.seo.title,
-        ogTitle: mainPage.page.seo.title,
-        description: mainPage.page.seo.metaDesc,
-        ogDescription: mainPage.page.seo.metaDesc,
+        title: mainPage.page.seo.title.replace('по Владимиру', 'по Москве'),
+        ogTitle: mainPage.page.seo.title.replace('по Владимиру', 'по Москве'),
+        description: mainPage.page.seo.metaDesc.replace('во Владимире', 'в Москве'),
+        ogDescription: mainPage.page.seo.metaDesc.replace('во Владимире', 'в Москве'),
         // ogImage: mainPage.page.seo.opengraphImage.sourceUrl,
     })
 

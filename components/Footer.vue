@@ -4,7 +4,7 @@
             <div class="footer">
                 <div class="footer__body">
                     <div class="footer__info">
-                        <a title="Переход на главную страницу" href="#" class="footer__logo"><img src="/img/inda-logo-white.svg" alt=""></a>
+                        <NuxtLink title="Переход на главную страницу" to="/" class="footer__logo"><img src="/img/inda-logo-white.svg" alt=""></NuxtLink>
                         <a href="mailto:info@indaparts.ru" class="footer__info-item">
                             <img src="/img/mail.svg" alt="">
                             <p class="footer__text text-big">info@indaparts.ru</p>
