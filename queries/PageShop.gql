@@ -1,0 +1,29 @@
+query PageShop {
+  productCategories(where: {hideEmpty: true, parent: 0}, first: 100) {
+    nodes {
+      children(first: 100) {
+        edges {
+          node {
+            slug
+            name
+          }
+        }
+      }
+      name
+      image {
+        sourceUrl(size: LARGE)
+      }
+      slug
+    }
+  }
+  page(id: "7", idType: DATABASE_ID) {
+    title
+    seo {
+      metaDesc
+      opengraphImage {
+        sourceUrl(size: LARGE)
+      }
+      title
+    }
+  }
+}

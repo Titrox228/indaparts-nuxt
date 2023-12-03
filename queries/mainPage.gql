@@ -1,0 +1,60 @@
+query mainPage {
+  products(
+    first: 20
+    where: {stockStatus: IN_STOCK, orderby: {field: TOTAL_SALES}, minPrice: 1, visibility: VISIBLE, onSale: true}
+  ) {
+    nodes {
+      name
+      slug
+      ... on SimpleProduct {
+        price
+        regularPrice
+        salePrice
+        dateOnSaleFrom
+        dateOnSaleTo
+      }
+      ... on VariableProduct {
+        price
+        regularPrice
+        salePrice
+        dateOnSaleFrom
+        dateOnSaleTo
+      }
+      averageRating
+      databaseId
+      id
+      image {
+        sourceUrl
+      }
+    }
+  }
+  productCategories(where: {parent: 0, hideEmpty: true}, first: 1000) {
+    nodes {
+      slug
+      name
+      image {
+        sourceUrl
+        slug
+      }
+    }
+  }
+  page(id: "40", idType: DATABASE_ID) {
+    mainPage {
+      glavnyjBanner {
+        opisanie
+        ssylka
+        zagolovok
+        izobrazhenie {
+          sourceUrl(size: LARGE)
+        }
+      }
+    }
+    seo {
+      title
+      metaDesc
+      opengraphImage {
+        sourceUrl(size: LARGE)
+      }
+    }
+  }
+}

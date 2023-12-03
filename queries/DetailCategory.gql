@@ -1,0 +1,55 @@
+query CategoryDetail($categoryIn: [String], $id: ID!) {
+  productCategory(id: $id, idType: URI) {
+    count
+    seo {
+      title
+      opengraphImage {
+        sourceUrl
+      }
+      metaDesc
+      breadcrumbs {
+        text
+        url
+      }
+    }
+    description
+    name
+  }
+  products(where: {categoryIn: $categoryIn}, first: 66) {
+    edges {
+      node {
+        id
+        name
+        image {
+          sourceUrl(size: LARGE)
+        }
+        slug
+        ... on VariableProduct {
+          id
+          name
+          regularPrice(format: FORMATTED)
+          price(format: FORMATTED)
+          salePrice(format: FORMATTED)
+        }
+        ... on SimpleProduct {
+          id
+          name
+          price(format: FORMATTED)
+          salePrice(format: FORMATTED)
+          regularPrice(format: FORMATTED)
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+      hasPreviousPage
+      offsetPagination {
+        hasMore
+        hasPrevious
+        total
+      }
+      startCursor
+    }
+  }
+}

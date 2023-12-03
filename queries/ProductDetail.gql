@@ -1,0 +1,46 @@
+query Product($slug: ID!) {
+  product(
+    id: $slug
+    idType: SLUG
+  ) {
+    description
+    featured
+    image {
+      sourceUrl
+    }
+    name
+    seo {
+      metaDesc
+      breadcrumbs {
+        text
+        url
+      }
+      opengraphImage {
+        sourceUrl
+      }
+      title
+    }
+    sku
+    title(format: RENDERED)
+    ... on VariableProduct {
+      id
+      name
+      price(format: FORMATTED)
+      regularPrice(format: FORMATTED)
+      salePrice(format: FORMATTED)
+    }
+    ... on SimpleProduct {
+      id
+      name
+      price(format: FORMATTED)
+      regularPrice(format: FORMATTED)
+      salePrice(format: FORMATTED)
+    }
+    galleryImages(first: 100) {
+      nodes {
+        sourceUrl
+      }
+    }
+    databaseId
+  }
+}
