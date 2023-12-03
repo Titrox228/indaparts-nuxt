@@ -15,10 +15,10 @@ const category = await GqlCategoryDetail({ categoryIn: uri, id: product_id }).th
 
 
 useSeoMeta({
-    title: category.productCategory.seo.title,
-    ogTitle: category.productCategory.seo.title,
-    description: category.productCategory.seo.metaDesc,
-    ogDescription: category.productCategory.seo.metaDesc,
+    title: category.productCategory.seo.title.replace('Владимиру', 'Москве'),
+    ogTitle: category.productCategory.seo.title.replace('Владимиру', 'Москве'),
+    description: category.productCategory.seo.metaDesc.replace('Владимиру', 'Москве'),
+    ogDescription: category.productCategory.seo.metaDesc.replace('Владимиру', 'Москве'),
     // ogImage: category.productCategory.seo.opengraphImage.sourceUrl,
 })
 </script>

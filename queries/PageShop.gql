@@ -24,6 +24,9 @@ query PageShop {
         sourceUrl(size: LARGE)
       }
       title
+      schema {
+        raw
+      }
     }
   }
 }

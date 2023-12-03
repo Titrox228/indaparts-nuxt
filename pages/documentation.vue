@@ -4,7 +4,7 @@
          <div class="container">
             <div class="documentation">
                <div class="breadcrupms">
-                  <p class="breadcrupms__text text-big"><a href="index.html">Главная</a> → <a href="#">Документация</a>
+                  <p class="breadcrupms__text text-big"><a href="#">Главная</a> → <a href="#">Документация</a>
                   </p>
                </div>
                <h2 class="documentation__title title">Документация</h2>

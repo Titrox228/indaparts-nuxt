@@ -43,10 +43,10 @@ const attributes = await getProductAttributes(productId)
 
 
 useSeoMeta({
-    title: product.product.seo.title,
-    ogTitle: product.product.seo.title,
-    description: product.product.seo.metaDesc,
-    ogDescription: product.product.seo.metaDesc,
+    title: product.product.seo.title.replace('indaparts.ru', 'indaparts.ru в Москве'),
+    ogTitle: product.product.seo.title.replace('indaparts.ru', 'indaparts.ru в Москве'),
+    description: product.product.seo.metaDesc.replace('indaparts.ru', 'indaparts.ru в Москве'),
+    ogDescription: product.product.seo.metaDesc.replace('indaparts.ru', 'indaparts.ru в Москве'),
     ogImage: product.product.seo.opengraphImage ? product.product.seo.opengraphImage.sourceUrl : '',
 })
 const images = []
@@ -54,7 +54,7 @@ images.push(product.product.image.sourceUrl)
 product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl))
 </script>
 <template>
-    <section class="section section__card">
+    <section class="section section__card" itemtype="https://schema.org/Product" itemscope>
         <div class="container">
             <div class="card">
                 <div class="breadcrupms">
@@ -77,7 +77,7 @@ product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl
     disableOnInteraction: true,
 }">
                             <SwiperSlide class="slide card__img" v-for="slide in images" :key="slide">
-                                <img :src="slide">
+                                <img :src="slide" itemprop="image" :alt="product.product.title" :title="product.product.title">
                             </SwiperSlide>
                             <div class="swiper__buttons" v-if="images.length > 1">
                                 <div class="swiper__btn swiper-prev">
@@ -95,7 +95,7 @@ product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl
                             :title="product.product.title" v-if="product.product.image">
                     </div> -->
                     <div class="card__content">
-                        <h1 class="card__title title-big" v-html="product.product.title"></h1>
+                        <h1 class="card__title title-big" v-html="product.product.title" itemprop="name"></h1>
                         <div class="card__status">
                             <img src="/img/thank-check.svg" alt="">
                             <p class="card__status-text subtext">В наличии</p>
@@ -110,12 +110,13 @@ product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl
                                 </li>
                             </ul>
                         </div>
-                        <div class="discount__item-price">
+                        <div class="discount__item-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                             <p class="discount__item-title subtitle-big bold" v-html="product.product.salePrice"
-                                v-if="product.product.salePrice"></p>
+                                v-if="product.product.salePrice" itemprop="price"></p>
                             <p class="discount__item-title text-big bold" v-html="product.product.regularPrice"
-                                v-if="product.product.regularPrice">
+                                v-if="product.product.regularPrice" itemprop="price">
                             </p>
+                            <meta itemprop="priceCurrency" content="RUB">
                         </div>
 
                         <div class="card__content-buy">
@@ -126,7 +127,7 @@ product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl
                                 <div class="btn__form-count minus"></div>
                             </form>
                         </div>
-                        <p class="card__text text-big">Артикул: {{ product.product.sku }}</p>
+                        <p class="card__text text-big" itemprop="sku">Артикул: {{ product.product.sku }}</p>
                         <div class="card__item">
 
                             <div class="product-delivery">
@@ -168,8 +169,8 @@ product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl
                         <div class="content">
                             <section>
                                 <h2 class="card__title title-big">Описание</h2>
-                                <div v-if="product.product.description" v-html="product.product.description"></div>
-                                <div v-else>
+                                <div v-if="product.product.description" v-html="product.product.description" itemprop="description"></div>
+                                <div v-else itemprop="description">
                                     <p>{{ product.product.title }} артикул <b>{{ product.product.sku }}</b> по цене <span
                                             v-html="product.product.price"> </span> в наличии.</p>
                                     <br>

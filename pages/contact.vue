@@ -3,14 +3,14 @@
         <div class="container">
             <div class="contact">
                 <div class="breadcrupms">
-                    <p class="breadcrupms__text text-big"><a href="index.html">Главная</a> → <a href="#">Контакты</a></p>
+                    <p class="breadcrupms__text text-big"><a href="#">Главная</a> → <a href="#">Контакты</a></p>
                 </div>
                 <h2 class="contact__title title">Контакты</h2>
                 <div class="contact__img">
                     <img src="/img/contact-map.webp" alt="">
                 </div>
-                <h3 class="contact__subtitle title-big">ООО «СтройкаСтор»</h3>
-                <div class="contact__items">
+                <h3 class="contact__subtitle title-big">IndaParts.ru</h3>
+                <!-- <div class="contact__items">
                     <div class="contact__item">
                         <p class="contact__text text">115114, г. Москва, Дербеневская <br>набережная, д. 7, стр. 8</p>
                         <p class="contact__text text">Павелецкая<br>
@@ -32,11 +32,11 @@
                         <p class="contact__text text">Поддержка клиентов<br>
                             info@stroykastore.ru</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
-    <section class="section section__about">
+    <!-- <section class="section section__about">
         <div class="container">
             <div class="about">
                 <h2 class="about__title title-big">О компании</h2>
@@ -50,5 +50,5 @@
                     строительные и отделочные материалы для дома и дачи.</p>
             </div>
         </div>
-    </section>
+    </section> -->
 </template>

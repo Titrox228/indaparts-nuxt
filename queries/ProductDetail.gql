@@ -19,6 +19,9 @@ query Product($slug: ID!) {
         sourceUrl
       }
       title
+      schema {
+        raw
+      }
     }
     sku
     title(format: RENDERED)

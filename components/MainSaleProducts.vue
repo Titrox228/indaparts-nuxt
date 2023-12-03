@@ -20,7 +20,7 @@ export default {
             <div class="discount">
                 <div class="discount__header header">
                     <h2 class="discount__title title-big">Акции</h2>
-                    <a href="items.html" class="discount__btn header__btn text">Все акции<svg width="24" height="24"
+                    <a href="#" class="discount__btn header__btn text">Все акции<svg width="24" height="24"
                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="#454950" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />

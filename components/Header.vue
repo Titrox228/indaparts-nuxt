@@ -21,7 +21,7 @@ export default {
                             d="M10 10.8333C11.3807 10.8333 12.5 9.71405 12.5 8.33333C12.5 6.95262 11.3807 5.83333 10 5.83333C8.61929 5.83333 7.5 6.95262 7.5 8.33333C7.5 9.71405 8.61929 10.8333 10 10.8333Z"
                             stroke="#5D6066" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    Владимир
+                    Москва
                 </button>
                 <nav class="header__top-menu">
                     <ul>

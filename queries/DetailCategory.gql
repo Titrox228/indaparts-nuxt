@@ -6,6 +6,9 @@ query CategoryDetail($categoryIn: [String], $id: ID!) {
       opengraphImage {
         sourceUrl
       }
+      schema {
+        raw
+      }
       metaDesc
       breadcrumbs {
         text
