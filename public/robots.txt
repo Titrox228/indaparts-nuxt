@@ -31,3 +31,5 @@ Disallow: /jest.setup.js
 Disallow: /test.*
 Disallow: /*.test.*
 Disallow: /*/*.test.*
+
+Sitemap: https://msk.indaparts.ru/sitemap.xml
