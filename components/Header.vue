@@ -1,3 +1,43 @@
+<script setup>
+useHead({
+    script: [
+        {
+            type: 'application/ld+json',
+            children: JSON.stringify([{
+                "@context": "http://schema.org",
+                "@type": "LocalBusiness",
+                "name": "Indaparts",
+                "alternateName": "Indaparts.ru | Интернет-магазин автозапчастей с доставкой по Москве",
+                "description": "Indaparts.ru - ведущий интернет-магазин автозапчастей в Москве. Быстрая доставка, широкий ассортимент и привлекательные цены.",
+                "url": "https://msk.indaparts.ru/",
+                "email": "info@indaparts.ru",
+                "logo": "https://msk.indaparts.ru/img/logo.svg",
+                "image": "https://msk.indaparts.ru/img/logo.svg",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "RU",
+                    "addressLocality": "Москва",
+                    "addressRegion": "Московская область",
+                    "postalCode": "115280",
+                    "streetAddress": "Велозаводская ул., 5"
+                }
+            }, {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "url": "https://msk.indaparts.ru",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://msk.indaparts.ru/search?q={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                }
+            }]),
+        },
+    ],
+});
+</script>
 <script>
 export default {
     data() {
@@ -80,28 +120,8 @@ export default {
 }
 </script>
 <template>
-    <header class="header" :class="{active: burgerActive}" :data-active="burgerActive">
+    <header class="header" :class="{ active: burgerActive }" :data-active="burgerActive">
         <div class="header__top hide_mobile">
-            <Script :children="jsonLd" type="application/ld+json">
-        {
-            "@context": "http://schema.org", 
-            "@type": "Organization", 
-            "name": "Indaparts",
-            "alternateName": "Indaparts.ru | Интернет-магазин автозапчастей с доставкой по Москве",
-            "description": "Indaparts.ru - ведущий интернет-магазин автозапчастей в Москве. Быстрая доставка, широкий ассортимент и привлекательные цены.",
-            "url": "https://msk.indaparts.ru/",
-            "email": "info@indaparts.ru",
-            "logo": "https://msk.indaparts.ru/img/logo.svg",
-            "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "RU",
-                "addressLocality": "Москва",
-                "addressRegion": "Московская область",
-                "postalCode": "115280",
-                "streetAddress": "Велозаводская ул., 5"
-            }
-       }
-        </Script>
             <div class="container">
                 <button class="open-geo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -135,8 +155,10 @@ export default {
             <div class="container">
                 <div class="header__row">
                     <button title="Открыть меню" class="header__burger">
-                        <img id="open-burger" @click="bodyFixPosition(); burgerActive = true" src="/img/burger-open-black.svg" alt="">
-                        <img id="close-burger" @click="bodyUnfixPosition(); burgerActive = false" src="/img/close.svg" alt="">
+                        <img id="open-burger" @click="bodyFixPosition(); burgerActive = true"
+                            src="/img/burger-open-black.svg" alt="">
+                        <img id="close-burger" @click="bodyUnfixPosition(); burgerActive = false" src="/img/close.svg"
+                            alt="">
                     </button>
                     <div class="header__logo">
                         <NuxtLink to="/">
@@ -284,6 +306,6 @@ export default {
                 </div>
             </div>
         </div>
-        
+
     </header>
 </template>

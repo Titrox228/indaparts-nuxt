@@ -63,15 +63,7 @@
    <section class="section section__card">
       <div class="container">
          <div class="card">
-            <div class="breadcrupms">
-               <p class="breadcrupms__text text-big">
-                  <NuxtLink :to="breadcrumb.url.split('indaparts.ru')[1]"
-                     v-for="breadcrumb in product.product.seo.breadcrumbs">{{ breadcrumb.text }} <span
-                     v-if="product.product.seo.breadcrumbs[product.product.seo.breadcrumbs.length - 1].url != breadcrumb.url">→
-                     </span>
-                  </NuxtLink>
-               </p>
-            </div>
+            <Breadcrumbs :breadcrumbs="product.product.seo.breadcrumbs"/>
             <div class="card__body">
                <div class="swiper-container">
                   <Swiper class="product__swiper" :modules="[SwiperNavigation, SwiperAutoplay]" :slides-per-view="1"
@@ -190,7 +182,7 @@
                               v-html="product.product.price"> </span> в наличии.</p>
                            <br>
                            <p>Закажите этот товар у нас на сайте и воспользуйтесь нашей удобной <b>доставкой по
-                              всей России</b>. Также у вас есть возможность <b>самовывоза во Владимире и
+                              всей России</b>. Также у вас есть возможность <b>самовывоза в Москве и
                               области.</b>
                            </p>
                            <br>
@@ -220,11 +212,11 @@
                               itemtype="https://schema.org/Question">
                               <input type="checkbox" name="accordion-1" id="cb1" checked="true">
                               <label for="cb1" class="tab__label" itemprop="name">Каковы сроки бесплатной
-                              доставки в Владимире?</label>
+                              доставки в Москве?</label>
                               <div class="tab__content" itemscope="" itemprop="acceptedAnswer"
                                  itemtype="https://schema.org/Answer">
                                  <p itemprop="text">Мы стремимся обеспечить наших клиентов быстрой и надежной
-                                    доставкой. Обычно, сроки бесплатной доставки в пределах Владимира
+                                    доставкой. Обычно, сроки бесплатной доставки в пределах Москвы и Московской области
                                     составляют 1-3 рабочих дня. Наша команда всегда старается выполнить
                                     заказ как можно быстрее. Мы также предоставляем информацию о доставке
                                     при оформлении заказа, чтобы вы могли быть в курсе ожидаемой даты

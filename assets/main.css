@@ -1080,7 +1080,13 @@ ul {
 
 .discount__item-title {
     margin-right: 8px;
-    color: #171b24
+    color: #171b24;
+
+}
+
+.discount__item-title:nth-child(1) {
+    font-size: 24px !important; 
+    font-weight: 600 !important;
 }
 
 .discount__item-title:nth-child(2) {

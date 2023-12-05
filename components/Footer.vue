@@ -21,7 +21,7 @@
                                     stroke="#5D6066" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <p class="footer__text text-big">Владимир, ул. Пушкина 1488</p>
+                            <p class="footer__text text-big">Москва, Велозаводская ул., 5</p>
                         </div>
                     </div>
                     <ul class="footer__list">

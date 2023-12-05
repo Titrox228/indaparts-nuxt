@@ -28,14 +28,7 @@ useSeoMeta({
     <section class="section section__items">
         <div class="container">
             <div class="items">
-                <div class="breadcrupms">
-                    <p class="breadcrupms__text text-big">
-                        <NuxtLink :to="breadcrumb.url.split('indaparts.ru')[1]"
-                            v-for="breadcrumb in category.productCategory.seo.breadcrumbs">{{ breadcrumb.text }} <span
-                                v-if="category.productCategory.seo.breadcrumbs[category.productCategory.seo.breadcrumbs.length - 1].url != breadcrumb.url">→ </span>
-                        </NuxtLink>
-                    </p>
-                </div>
+                <Breadcrumbs :breadcrumbs="category.productCategory.seo.breadcrumbs"/>
                 <h2 class="items__title title">{{ category.productCategory.name }}</h2>
                 <div class="items__body">
                     <aside class="items__aside">
