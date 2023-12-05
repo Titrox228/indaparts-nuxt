@@ -1,7 +1,7 @@
 <script setup>
 const route = useRoute()
 const uri = route.params.uri2
-const product_id = `/product-category/${route.params.uri}/${route.params.uri1}/${route.params.uri2}/`
+const product_id = route.path
 const category = await GqlCategoryDetail({ categoryIn: uri, id: product_id }).then(data => {
     return data
 }).catch(data => {

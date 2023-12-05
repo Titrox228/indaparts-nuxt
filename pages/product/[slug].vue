@@ -52,7 +52,7 @@ useHead({
    link: [
       {
          rel: 'canonical',
-         href: 'https://msk.indaparts.ru/product/' + route.path,
+         href: 'https://msk.indaparts.ru' + route.path,
       },
    ],
 })
