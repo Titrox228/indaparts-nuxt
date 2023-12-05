@@ -1,79 +1,87 @@
 <script setup>
-   const route = useRoute()
-   
-   const product = await GqlProduct({ slug: route.params.slug }).then(data => {
-       return data
-   }).catch(data => {
-       if (data.gqlErrors) {
-           throw createError({
-               statusCode: 404,
-               message: 'Товар не найден'
-           })
-       }
-   })
-   
-   async function getProductAttributes(productId) {
-       try {
-           const response = await fetch(`https://indaparts.ru/wp-json/custom/v1/product-attributes/${productId}`);
-   
-           if (!response.ok) {
-               throw new Error(`HTTP error! Status: ${response.status}`);
-           }
-   
-           const data = await response.json();
-           return data;
-       } catch (error) {
-           console.error('Error fetching product attributes:', error);
-           throw error;
-       }
+const route = useRoute()
+
+const product = await GqlProduct({ slug: route.params.slug }).then(data => {
+   return data
+}).catch(data => {
+   if (data.gqlErrors) {
+      throw createError({
+         statusCode: 404,
+         message: 'Товар не найден'
+      })
    }
-   // Пример использования
-   const productId = product.product.databaseId;
-   
-   const attributes = await getProductAttributes(productId)
-       .then(attributes => {
-           return attributes
-           // Здесь вы можете обрабатывать полученные атрибуты
-       })
-       .catch(error => {
-           // Обработка ошибок
-       });
-   
-   
-   
-   useSeoMeta({
-       title: product.product.seo.title.replace('indaparts.ru', 'indaparts.ru в Москве'),
-       ogTitle: product.product.seo.title.replace('indaparts.ru', 'indaparts.ru в Москве'),
-       description: product.product.seo.metaDesc.replace('indaparts.ru', 'indaparts.ru в Москве'),
-       ogDescription: product.product.seo.metaDesc.replace('indaparts.ru', 'indaparts.ru в Москве'),
-       ogImage: product.product.seo.opengraphImage ? product.product.seo.opengraphImage.sourceUrl : '',
-   })
-   const images = []
-   images.push(product.product.image.sourceUrl)
-   let price = ''
-   product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl))
-   if (product.product.salePrice || product.product.regularPrice) {
-        price = product.product.salePrice ? product.product.salePrice.split(',')[0] : product.product.regularPrice.split(',')[0]
-   }else {
-        price = false
+})
+
+async function getProductAttributes(productId) {
+   try {
+      const response = await fetch(`https://indaparts.ru/wp-json/custom/v1/product-attributes/${productId}`);
+
+      if (!response.ok) {
+         throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+   } catch (error) {
+      console.error('Error fetching product attributes:', error);
+      throw error;
    }
-   
+}
+// Пример использования
+const productId = product.product.databaseId;
+
+const attributes = await getProductAttributes(productId)
+   .then(attributes => {
+      return attributes
+      // Здесь вы можете обрабатывать полученные атрибуты
+   })
+   .catch(error => {
+      // Обработка ошибок
+   });
+
+
+
+useSeoMeta({
+   title: product.product.seo.title.replace('indaparts.ru', 'indaparts.ru в Москве'),
+   ogTitle: product.product.seo.title.replace('indaparts.ru', 'indaparts.ru в Москве'),
+   description: product.product.seo.metaDesc.replace('indaparts.ru', 'indaparts.ru в Москве'),
+   ogDescription: product.product.seo.metaDesc.replace('indaparts.ru', 'indaparts.ru в Москве'),
+   ogImage: product.product.seo.opengraphImage ? product.product.seo.opengraphImage.sourceUrl : '',
+})
+useHead({
+   link: [
+      {
+         rel: 'canonical',
+         href: 'https://msk.indaparts.ru/product/' + route.path,
+      },
+   ],
+})
+const images = []
+images.push(product.product.image.sourceUrl)
+let price = ''
+product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl))
+if (product.product.salePrice || product.product.regularPrice) {
+   price = product.product.salePrice ? product.product.salePrice.split(',')[0] : product.product.regularPrice.split(',')[0]
+} else {
+   price = false
+}
+
 </script>
 <template>
    <section class="section section__card">
       <div class="container">
          <div class="card">
-            <Breadcrumbs :breadcrumbs="product.product.seo.breadcrumbs"/>
+            <Breadcrumbs :breadcrumbs="product.product.seo.breadcrumbs" />
             <div class="card__body">
                <div class="swiper-container">
                   <Swiper class="product__swiper" :modules="[SwiperNavigation, SwiperAutoplay]" :slides-per-view="1"
                      :loop="true" :navigation="{
-                     nextEl: '.swiper-next',
-                     prevEl: '.swiper-prev'
+                        nextEl: '.swiper-next',
+                        prevEl: '.swiper-prev'
                      }" :autoplay="{
-                     delay: 8000,
-                     disableOnInteraction: true,
-                     }">
+   delay: 8000,
+   disableOnInteraction: true,
+}">
                      <SwiperSlide class="slide card__img" v-for="slide in images" :key="slide">
                         <img :src="slide" :alt="product.product.title" :title="product.product.title">
                      </SwiperSlide>
@@ -143,8 +151,7 @@
                      </li>
                      <li title="Характеристики" v-if="attributes.length">
                         <label for="tab2" role="button">
-                           <svg
-                              viewBox="0 0 24 24">
+                           <svg viewBox="0 0 24 24">
                               <path
                                  d="M2,10.96C1.5,10.68 1.35,10.07 1.63,9.59L3.13,7C3.24,6.8 3.41,6.66 3.6,6.58L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.66,6.72 20.82,6.88 20.91,7.08L22.36,9.6C22.64,10.08 22.47,10.69 22,10.96L21,11.54V16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V10.96C2.7,11.13 2.32,11.14 2,10.96M12,4.15V4.15L12,10.85V10.85L17.96,7.5L12,4.15M5,15.91L11,19.29V12.58L5,9.21V15.91M19,15.91V12.69L14,15.59C13.67,15.77 13.3,15.76 13,15.6V19.29L19,15.91M13.85,13.36L20.13,9.73L19.55,8.72L13.27,12.35L13.85,13.36Z" />
                            </svg>
@@ -176,14 +183,14 @@
                   <div class="content">
                      <section>
                         <h2 class="card__title title-big">Описание</h2>
-                        <div v-if="product.product.description" v-html="product.product.description" ></div>
+                        <div v-if="product.product.description" v-html="product.product.description"></div>
                         <div v-else>
                            <p>{{ product.product.title }} артикул <b>{{ product.product.sku }}</b> по цене <span
-                              v-html="product.product.price"> </span> в наличии.</p>
+                                 v-html="product.product.price"> </span> в наличии.</p>
                            <br>
                            <p>Закажите этот товар у нас на сайте и воспользуйтесь нашей удобной <b>доставкой по
-                              всей России</b>. Также у вас есть возможность <b>самовывоза в Москве и
-                              области.</b>
+                                 всей России</b>. Также у вас есть возможность <b>самовывоза в Москве и
+                                 области.</b>
                            </p>
                            <br>
                            <p>Мы предлагаем широкий ассортимент товаров для автолюбителей и не только. Ознакомьтесь
@@ -208,11 +215,10 @@
                      <section>
                         <h2 class="card__title title-big">Вопрос-ответ</h2>
                         <div class="faq-block" itemscope="" itemtype="https://schema.org/FAQPage">
-                           <div class="tab" itemscope="" itemprop="mainEntity"
-                              itemtype="https://schema.org/Question">
+                           <div class="tab" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <input type="checkbox" name="accordion-1" id="cb1" checked="true">
                               <label for="cb1" class="tab__label" itemprop="name">Каковы сроки бесплатной
-                              доставки в Москве?</label>
+                                 доставки в Москве?</label>
                               <div class="tab__content" itemscope="" itemprop="acceptedAnswer"
                                  itemtype="https://schema.org/Answer">
                                  <p itemprop="text">Мы стремимся обеспечить наших клиентов быстрой и надежной
@@ -224,11 +230,10 @@
                                  </p>
                               </div>
                            </div>
-                           <div class="tab" itemscope="" itemprop="mainEntity"
-                              itemtype="https://schema.org/Question">
+                           <div class="tab" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <input type="checkbox" name="accordion-1" id="cb2">
                               <label for="cb2" class="tab__label" itemprop="name">Какие виды автотоваров вы
-                              предлагаете?</label>
+                                 предлагаете?</label>
                               <div class="tab__content" itemscope="" itemprop="acceptedAnswer"
                                  itemtype="https://schema.org/Answer">
                                  <p itemprop="text">Наш интернет-магазин предлагает широкий ассортимент
@@ -239,11 +244,10 @@
                                  </p>
                               </div>
                            </div>
-                           <div class="tab" itemscope="" itemprop="mainEntity"
-                              itemtype="https://schema.org/Question">
+                           <div class="tab" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <input type="checkbox" name="accordion-1" id="cb3">
                               <label for="cb3" class="tab__label" itemprop="name">Как узнать, подходит ли
-                              определенная запчасть для моего автомобиля?</label>
+                                 определенная запчасть для моего автомобиля?</label>
                               <div class="tab__content" itemscope="" itemprop="acceptedAnswer"
                                  itemtype="https://schema.org/Answer">
                                  <p itemprop="text">Мы понимаем, что выбор правильных запчастей для вашего
@@ -255,11 +259,10 @@
                                  </p>
                               </div>
                            </div>
-                           <div class="tab" itemscope="" itemprop="mainEntity"
-                              itemtype="https://schema.org/Question">
+                           <div class="tab" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <input type="checkbox" name="accordion-1" id="cb4">
                               <label for="cb4" class="tab__label" itemprop="name">Могу ли я вернуть или
-                              обменять товар, если он не подошел или не устроил меня?</label>
+                                 обменять товар, если он не подошел или не устроил меня?</label>
                               <div class="tab__content" itemscope="" itemprop="acceptedAnswer"
                                  itemtype="https://schema.org/Answer">
                                  <p itemprop="text">Да, ваше удовлетворение от покупки очень важно для нас.
@@ -271,11 +274,10 @@
                                  </p>
                               </div>
                            </div>
-                           <div class="tab" itemscope="" itemprop="mainEntity"
-                              itemtype="https://schema.org/Question">
+                           <div class="tab" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <input type="checkbox" name="accordion-1" id="cb5">
                               <label for="cb5" class="tab__label" itemprop="name">Какие способы оплаты вы
-                              принимаете?</label>
+                                 принимаете?</label>
                               <div class="tab__content" itemscope="" itemprop="acceptedAnswer"
                                  itemtype="https://schema.org/Answer">
                                  <p itemprop="text">Мы предоставляем разнообразные варианты оплаты, чтобы

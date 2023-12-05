@@ -9,6 +9,16 @@ useSeoMeta({
     ogDescription: shop.page.seo.metaDesc,
     ogImage: shop.page.seo.opengraphImage ? shop.page.seo.opengraphImage.sourceUrl : false,
 })
+
+useHead({
+    link: [
+        {
+            rel: 'canonical',
+            href: 'https://msk.indaparts.ru/shop/',
+        },
+    ],
+})
+
 </script>
 <template>
     <section class="section section__katalog">
