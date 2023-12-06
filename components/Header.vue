@@ -274,16 +274,15 @@ export default {
                 </div>
                 <div class="header__mobile-menu-list">
                     <nav>
-                        <ul>
+                        <ul @click="bodyUnfixPosition(); burgerActive = false">
                             <li><a href="#">Акции</a></li>
-                            <li><a href="#">Строительные материалы</a></li>
-                            <li><a href="#">Керамическая плитка</a></li>
-                            <li><a href="#">Краски</a></li>
-                            <li><a href="#">Сантехника</a></li>
-                            <li><a href="#">Напольные покрытия</a></li>
-                            <li><a href="#">Инструменты</a></li>
-                            <li><a href="#">Обои</a></li>
-                            <li><a href="#">Окна</a></li>
+                            <li><NuxtLink to="/product-category/avtoaksessuary">Автоаксессуары</NuxtLink></li>
+                            <li><NuxtLink to="/product-category/avtozapchasti">Автозапчасти</NuxtLink></li>
+                            <li><NuxtLink to="/product-category/avtokosmetika-i-avtohimiya">Автокосметика и автохимия</NuxtLink></li>
+                            <li><NuxtLink to="/product-category/shiny-diski">Шины, диски</NuxtLink></li>
+                            <li><NuxtLink to="/product-category/filtry-dlya-avto">Фильтры для авто</NuxtLink></li>
+                            <li><NuxtLink to="/product-category/instrument">Инструменты</NuxtLink></li>
+                            <li><NuxtLink to="product-category/krepezh-metizy-zaglushki-remkomplekty">Крепеж, метизы, заглушки, ремкомплекты</NuxtLink></li>
                         </ul>
                     </nav>
                 </div>
