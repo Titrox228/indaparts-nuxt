@@ -34,14 +34,16 @@ export default defineNuxtConfig({
       GQL_HOST: 'https://indaparts.ru/graphql'
     }
   },
-  // nitro: { // was required to add this for the nuxt/simple-sitemap module
-  //   prerender: {
-  //     crawlLinks: true,
-  //     routes: [
-  //       '/',
-  //       '/404.html' // was told online to try this, but didn't work
-  //     ]
-  //   }
-  // }
+  app: {
+    head: {
+      link: [
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: "/favicon.ico"
+        }
+      ]
+    }
+  }
 
 })
