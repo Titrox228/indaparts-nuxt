@@ -57,7 +57,7 @@ useHead({
    ],
 })
 const images = []
-images.push(product.product.image.sourceUrl)
+images.push(product.product.image ? product.product.image.sourceUrl : 'https://indaparts.ru/wp-content/uploads/woocommerce-placeholder.png')
 let price = ''
 product.product.galleryImages.nodes.forEach(image => images.push(image.sourceUrl))
 if (product.product.salePrice || product.product.regularPrice) {

@@ -3,7 +3,7 @@
         <p class="breadcrupms__text text-big">
             <span v-for="breadcrumb,i in breadcrumbs" :key="breadcrumb.url" itemprop="itemListElement" itemscope
                 itemtype="https://schema.org/ListItem">
-                <NuxtLink itemprop="item" :to="breadcrumb.url.split('indaparts.ru')[1]"><span itemprop="name"> {{
+                <NuxtLink itemprop="item" :to="breadcrumb.url.split('indaparts.ru')[1]"><span itemprop="name"><span style="display: none">✅</span>{{
                     breadcrumb.text }}</span> <span v-if="breadcrumbs[breadcrumbs.length - 1].url != breadcrumb.url">→
                     </span>
                 </NuxtLink>

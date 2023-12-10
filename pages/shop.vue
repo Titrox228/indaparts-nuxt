@@ -51,7 +51,7 @@ useHead({
                 <div class="katalog__items">
                     <div class="katalog__item" v-for="category in shop.productCategories.nodes" :key="category.slug">
                         <h4 class="katalog__item-title text">
-                            <NuxtLink class="katalog__item-title text" :to="`/product-category/${category.slug}`">
+                            <NuxtLink class="katalog__item-title text" :to="`/product-category/${category.slug}/`">
                                 {{category.name}}
                             </NuxtLink>
                         </h4>
@@ -61,7 +61,7 @@ useHead({
                         <ul class="katalog__item-list">
                             <li v-for="subcategory in category.children.edges">
                                 <img src="/img/hover-arrow.svg" alt="">
-                                <NuxtLink class="katalog__item-text text-big bold" :to="`/product-category/${category.slug}/${subcategory.node.slug}`">{{ subcategory.node.name }}</NuxtLink>
+                                <NuxtLink class="katalog__item-text text-big bold" :to="`/product-category/${category.slug}/${subcategory.node.slug}/`">{{ subcategory.node.name }}</NuxtLink>
                             </li>
                         </ul>
                     </div>
