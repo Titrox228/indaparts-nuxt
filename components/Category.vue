@@ -2,8 +2,40 @@
 const route = useRoute()
 const lastKey = Object.keys(route.params)[Object.keys(route.params).length - 1]
 const uri = route.params[lastKey]
-const product_id = route.path
-const category = await GqlCategoryDetail({ categoryIn: uri, id: product_id }).then(data => {
+const product_id = route.path.split('?')[0]
+
+let order_field
+let order
+switch (route.query.order) {
+    case "alphabet":
+        order_field = 'NAME'
+        order = 'ASC'
+        break;
+    case "popular":
+        order_field = 'TOTAL_SALES'
+        order = 'ASC'
+        break;
+    case "cheap":
+        order_field = 'PRICE'
+        order = 'ASC'
+        break;
+    case "expensive":
+        order_field = 'PRICE'
+        order = 'DESC'
+        break;
+    default:
+        order_field = 'DATE'
+        order = 'ASC'
+        break
+}
+const category = await GqlCategoryDetail(
+    {
+        categoryIn: uri,
+        id: product_id,
+        field: order_field,
+        order: order
+    }
+).then(data => {
     if (data.gqlErrors || data.productCategory == null) {
         throw createError({
             statusCode: 404,
@@ -28,8 +60,54 @@ useSeoMeta({
     ogDescription: category.productCategory.seo.metaDesc.replace('Владимиру', 'Москве'),
     // ogImage: category.productCategory.seo.opengraphImage.sourceUrl,
 })
+if (order_field != 'DATE' && order != 'ASC') {
+    useHead({
+        meta: [
+            { name: 'robots', content: 'noindex, follow' }
+        ],
+    })
+}
+
 </script>
 
+
+<script>
+
+export default {
+    data() {
+        return {
+            currentLink: ''
+        }
+    },
+    methods: {
+        async toggleSimpleFilter(value) {
+
+
+            const currentOrder = new URL(window.location.href).searchParams.get('order')
+
+            if (currentOrder != value) {
+                await this.$router.replace({
+                    path: window.location.pathname,
+                    query: { order: value }
+                })
+            } else {
+                await this.$router.replace({
+                    path: window.location.pathname,
+                    query: {}
+                })
+            }
+
+
+            this.$router.go(this.$router.currentRoute)
+        }
+    },
+    created() {
+        const route = useRoute();
+        this.currentLink = route.query;
+    }
+}
+
+</script>
 
 <template>
     <section class="section section__items">
@@ -117,18 +195,23 @@ useSeoMeta({
                     </aside>
                     <div class="items__container">
                         <div class="items__sort">
-                            <a href="#" class="items__burger text-big bold">Фильтр</a>
-                            <a href="#" class="items__text text-big bold active">Популярные</a>
-                            <a href="#" class="items__text text-big bold">Дешевле</a>
-                            <a href="#" class="items__text text-big bold">Дороже</a>
-                            <a href="#" class="items__text text-big bold">По алфавиту</a>
+                            <div href="#" class="items__burger text-big bold">Фильтр</div>
+                            <div :class="{ active: currentLink.order == 'popular' }" @click="toggleSimpleFilter('popular')"
+                                class="items__text text-big bold">Популярные
+                            </div>
+                            <div :class="{ active: currentLink.order == 'cheap' }" @click="toggleSimpleFilter('cheap')"
+                                class="items__text text-big bold">Дешевле</div>
+                            <div :class="{ active: currentLink.order == 'expensive' }"
+                                @click="toggleSimpleFilter('expensive')" class="items__text text-big bold">Дороже</div>
+                            <div :class="{ active: currentLink.order == 'alphabet' }"
+                                @click="toggleSimpleFilter('alphabet')" class="items__text text-big bold">По алфавиту</div>
                         </div>
                         <div class="items__items">
                             <div v-for="product in category.products.edges" :key="product.node.slug"
                                 class="items__item katalog__item">
                                 <NuxtLink :to="`/product/${product.node.slug}`" class="items__item-img">
-                                    <img :src="product.node.image ? product.node.image.sourceUrl : 'https://indaparts.ru/wp-content/uploads/woocommerce-placeholder.png'" :alt="product.node.name"
-                                        :title="product.node.name">
+                                    <img :src="product.node.image ? product.node.image.sourceUrl : 'https://indaparts.ru/wp-content/uploads/woocommerce-placeholder.png'"
+                                        :alt="product.node.name" :title="product.node.name">
                                 </NuxtLink>
                                 <div class="items__item-content">
                                     <NuxtLink :to="`/product/${product.node.slug}`" class="items__item-text text-big">{{
