@@ -17,7 +17,7 @@ export default {
                     </a>
                 </div>
                 <div class="kategory__items">
-                    <NuxtLink :to="`/product-category/${category.slug}`" class="kategory__item" v-for="category in categories">
+                    <NuxtLink :to="`/product-category/${category.slug}/`" class="kategory__item" v-for="category in categories">
                         <p class="kategory__item-text text">{{ category.name }}</p>
                         <div class="kategory__item-img">
                             <img loading="lazy" decoding="async" :src="category.image.sourceUrl" :alt="category.name">
