@@ -18,17 +18,13 @@ export default defineNuxtConfig({
     '~/assets/main.css'
   ],
   ssr: true,
-  modules: [
-    'nuxt-swiper',
-    'nuxt-graphql-client',
-    [
-      'yandex-metrika-module-nuxt3',
-      {
-        id: '95761109',
-        webvisor: true,
-      }
-    ]
-  ],
+  modules: ['nuxt-swiper', 'nuxt-graphql-client', [
+    'yandex-metrika-module-nuxt3',
+    {
+      id: '95761109',
+      webvisor: true,
+    }
+  ], "@nuxt/image"],
   runtimeConfig: {
     public: {
       GQL_HOST: 'https://indaparts.ru/graphql'

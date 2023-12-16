@@ -210,8 +210,9 @@ export default {
                             <div v-for="product in category.products.edges" :key="product.node.slug"
                                 class="items__item katalog__item">
                                 <NuxtLink :to="`/product/${product.node.slug}`" class="items__item-img">
-                                    <img :src="product.node.image ? product.node.image.sourceUrl : 'https://indaparts.ru/wp-content/uploads/woocommerce-placeholder.png'"
-                                        :alt="product.node.name" :title="product.node.name">
+                                    <!-- <img :src="product.node.image ? product.node.image.sourceUrl : 'https://indaparts.ru/wp-content/uploads/woocommerce-placeholder.png'"
+                                        :alt="product.node.name" :title="product.node.name"> -->
+                                    <NuxtImg :src="product.node.image ? product.node.image.sourceUrl : 'https://indaparts.ru/wp-content/uploads/woocommerce-placeholder.png'" loading="lazy"  format="webp" />
                                 </NuxtLink>
                                 <div class="items__item-content">
                                     <NuxtLink :to="`/product/${product.node.slug}`" class="items__item-text text-big">{{
