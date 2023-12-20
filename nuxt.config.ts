@@ -24,11 +24,19 @@ export default defineNuxtConfig({
       id: '95761109',
       webvisor: true,
     }
-  ], "@nuxt/image"],
+  ], "@nuxt/image", '@nuxtjs/apollo'],
   runtimeConfig: {
     public: {
       GQL_HOST: 'https://indaparts.ru/graphql'
     }
+  },
+
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: 'https://indaparts.ru/graphql'
+      }
+    },
   },
   app: {
     head: {

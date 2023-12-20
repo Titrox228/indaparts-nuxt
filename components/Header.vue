@@ -184,7 +184,7 @@ export default {
                     <img src="/img/catalog.svg" alt="">
                     Каталог
                 </button>
-                <search role="search" class="header__search">
+                <div role="search" class="header__search">
                     <form>
                         <div class="input-iconed">
                             <input type="text" name="search" placeholder="Поиск">
@@ -193,7 +193,7 @@ export default {
                             </button>
                         </div>
                     </form>
-                </search>
+                </div>
                 <div class="header__controlls hide_mobile">
                     <button class="header__controll">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -233,7 +233,7 @@ export default {
                 </div>
             </div>
             <div class="container">
-                <search role="search" class="header__search header__search-tablet">
+                <div role="search" class="header__search header__search-tablet">
                     <form>
                         <div class="input-iconed">
                             <input type="text" name="search" placeholder="Поиск">
@@ -242,7 +242,7 @@ export default {
                             </button>
                         </div>
                     </form>
-                </search>
+                </div>
             </div>
         </div>
         <div class="header__mobile-menu">

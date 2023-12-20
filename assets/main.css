@@ -4250,7 +4250,7 @@ header.header.active .header__mobile-menu {
 }
 
 .tabs .content section h2,
-.tabs>ul li label {
+.tabs>ul li a {
     font-weight: bold;
     font-size: 18px;
     color: #ff4242;
@@ -4275,7 +4275,7 @@ header.header.active .header__mobile-menu {
     text-align: center;
 }
 
-.tabs>ul li label {
+.tabs>ul li a {
     transition: all 0.3s ease-in-out;
     color: #929daf;
     padding: 5px auto;
@@ -4292,11 +4292,11 @@ header.header.active .header__mobile-menu {
     user-select: none;
 }
 
-.tabs>ul li label br {
+.tabs>ul li a br {
     display: none;
 }
 
-.tabs>ul li label svg {
+.tabs>ul li a svg {
     fill: #929daf;
     height: 1.2em;
     vertical-align: bottom;
@@ -4304,16 +4304,16 @@ header.header.active .header__mobile-menu {
     transition: all 0.2s ease-in-out;
 }
 
-.tabs>ul li label:hover,
-.tabs>ul li label:focus,
-.tabs>ul li label:active {
+.tabs>ul li a:hover,
+.tabs>ul li a:focus,
+.tabs>ul li a:active {
     outline: 0;
     color: #bec5cf;
 }
 
-.tabs>ul li label:hover svg,
-.tabs>ul li label:focus svg,
-.tabs>ul li label:active svg {
+.tabs>ul li a:hover svg,
+.tabs>ul li a:focus svg,
+.tabs>ul li a:active svg {
     fill: #bec5cf;
 }
 
@@ -4492,26 +4492,26 @@ header.header.active .header__mobile-menu {
 }
 
 @media (max-width: 1000px) {
-    .tabs>ul li label {
+    .tabs>ul li a {
         white-space: initial;
     }
 
-    .tabs>ul li label br {
+    .tabs>ul li a br {
         display: initial;
     }
 
-    .tabs>ul li label svg {
+    .tabs>ul li a svg {
         height: 1.5em;
     }
 }
 
 @media (max-width: 600px) {
-    .tabs>ul li label {
+    .tabs>ul li a {
         padding: 5px;
         border-radius: 5px;
     }
 
-    .tabs>ul li label span {
+    .tabs>ul li a span {
         display: none;
     }
 
