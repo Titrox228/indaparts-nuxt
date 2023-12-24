@@ -32,4 +32,4 @@ Disallow: /test.*
 Disallow: /*.test.*
 Disallow: /*/*.test.*
 
-Sitemap: https://msk.indaparts.ru/sitemap.xml
+Sitemap: https://msk.indaparts.ru/sitemap-index.xml
