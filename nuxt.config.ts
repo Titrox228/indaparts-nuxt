@@ -1,12 +1,7 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 import { resolve } from 'path'
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  // devServer: {
-  //   port: 8000, // default: 3000     
-  //   host: '192.168.1.106', // default: localhost   
-  // },
   'graphql-client': {
     preferGETQueries: true
   },
@@ -34,7 +29,8 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: 'https://indaparts.ru/graphql'
+        httpEndpoint: 'https://indaparts.ru/graphql',
+        useGETForQueries: true
       }
     },
   },
