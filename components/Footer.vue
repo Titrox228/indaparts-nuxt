@@ -137,7 +137,7 @@
     <div class="modal__wrapper" id="modal1">
         <div class="modal">
            <span class="modal__close"></span>
-           <h1 class="modal__title title-big">Выберите ваш город</h1>
+           <span class="modal__title title-big">Выберите ваш город</span>
            <form class="nav__form">
               <input type="text" class="nav__form-input" placeholder="Поиск">
               <button type="submit" class="nav__form-btn"><img src="/img/search.svg" alt=""></button>
