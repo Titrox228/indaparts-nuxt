@@ -190,7 +190,7 @@
      <div class="modal__wrapper" id="modal2">
         <div class="modal">
            <span class="modal__close"></span>
-           <h2 class="modal__title title-big">Вход</h2>
+           <span class="modal__title title-big">Вход</span>
            <form action="#" class="cabinet__form">
               <div class="cabinet__form-item">
                  <label class="cabinet__form-label text-big bold">E-mail</label>
@@ -209,7 +209,7 @@
      <div class="modal__wrapper" id="modal3">
         <div class="modal">
            <span class="modal__close"></span>
-           <h2 class="modal__title title-big">Регистрация</h2>
+           <span class="modal__title title-big">Регистрация</span>
            <form action="#" class="cabinet__form">
               <div class="cabinet__form-item half">
                  <label class="cabinet__form-label text-big bold">Имя</label>
